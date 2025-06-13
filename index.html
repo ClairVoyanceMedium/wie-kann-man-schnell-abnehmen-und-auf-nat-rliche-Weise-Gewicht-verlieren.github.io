@@ -1884,6 +1884,647 @@
     </p>
 </footer>
 
+    <!-- Tchat IA total komplett -->
+<title>KI-Chat mit Tracking und Sprachassistent</title>
+
+    <meta name="description" content="Spiritueller Chatbot für Entzauberung, Schutz und Aurareinigung durch Frederick von ClairVoyanceMedium.com. Gewinnen Sie schnell Vitalität und Gelassenheit für einen Einzelpreis.">
+    <meta name="keywords" content="verzaubert, Albträume, Entzauberung, Schutz, Reinigung, energetische Säuberung, Hellsehen, Aura, Energie, Hilfe, Schlaf, Rituale, spirituell">
+
+    <style>
+        #chat-container {
+            position: fixed;
+            display: inline-block;
+            flex-direction: column;
+            z-index: 999999;
+            font-family: Arial, sans-serif;
+            transition: transform 0.2s;
+        }
+        #chat-bubble {
+            display: flex;
+            justify-content: flex-end;
+            cursor: move;
+        }
+        #chat-toggle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #FFB6C1, #FF69B4);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(255,105,180,0.7);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            outline: none;
+        }
+        #chat-toggle:hover {
+            transform: scale(1.05);
+        }
+        #voice-toggle {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #87CEEB, #5eb6d1);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(135,206,235,0.7);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            transition: transform 0.2s;
+            outline: none;
+        }
+        #voice-toggle:hover {
+            transform: scale(1.05);
+        }
+        #voice-toggle.disabled {
+            background: #808080;
+            box-shadow: 0 0 10px #808080;
+        }
+        #chat-box {
+            background: #111;
+            border-radius: 10px;
+            display: none;
+            flex-direction: column;
+            margin-top: 10px;
+            border: 2px solid #FF1493;
+            box-shadow: 0 0 10px #FF1493;
+            transition: all 0.3s ease;
+            max-height: 400px;
+        }
+        #chat-box.visible {
+            display: flex;
+        }
+        #chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            color: #fff;
+        }
+        #chat-messages p {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .bot-message {
+            text-align: left;
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            max-width: 80%;
+            border: 2px solid #FF69B4;
+            box-shadow: 0 0 8px #FF69B4;
+        }
+        .user-message {
+            text-align: right;
+            color: #ffd700;
+            margin-bottom: 0.8rem;
+            border: 2px solid #AED6F1;
+            box-shadow: 0 0 8px #AED6F1;
+            padding: 0.5rem;
+            border-radius: 5px;
+            display: inline-block;
+            max-width: 80%;
+        }
+        #chat-form {
+            display: flex;
+            border-top: 1px solid #333;
+            align-items: center;
+            padding: 0.5rem;
+        }
+        #chat-input {
+            flex: 1;
+            padding: 0.5rem;
+            border: none;
+            outline: none;
+            color: #333;
+            border-radius: 5px 0 0 5px;
+        }
+        #chat-send {
+            background: #87CEEB;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 0 5px 5px 0;
+            transition: background 0.2s;
+        }
+        #chat-send:hover {
+            background: #5eb6d1;
+        }
+        @media(max-width: 400px) {
+            #chat-container {
+                width: 90%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div id="chat-container">
+    <div id="chat-bubble">
+        <button id="chat-toggle" aria-expanded="false" aria-label="Chat öffnen">💬</button>
+        <button id="voice-toggle" aria-label="Sprachassistent aktivieren/deaktivieren">🎤</button>
+    </div>
+    <div id="chat-box" role="region" aria-label="KI-Chat">
+        <div id="chat-messages" aria-live="polite"></div>
+        <form id="chat-form" aria-label="Eingabeformular für KI-Chat">
+            <input type="text" id="chat-input" placeholder="Stellen Sie Ihre Frage..." aria-label="Geben Sie hier Ihre Nachricht ein" autocomplete="off">
+            <button type="submit" id="chat-send" aria-label="Frage senden">➤</button>
+        </form>
+    </div>
+</div>
+
+
+<script nonce="xai-ultra2025">
+// GA4 Tracking-Funktion
+function trackClick(label, category = 'Chat', value = null) {
+    console.log(`Tracking: Label=${label}, Category=${category}, Value=${value}`);
+    if (typeof gtag === 'function') {
+        gtag('event', label, { 'event_category': category, 'value': value });
+    }
+}
+
+// Übersetzungen und Nachrichten
+const translations = {
+        greeting: "Willkommen im Universum von ClairVoyanceMedium.com! Ich bin ClairVoyanceGPT, Ihr persönlicher Führer, hier um Ihnen zu helfen, Vitalität, Schlankheit und Gelassenheit durch unsere Victory Abnehmprodukte und unsere spirituellen Lösungen zurückzugewinnen, um Ihr körperliches und mentales Wohlbefinden deutlich zu verbessern!",
+        thanks: "Gern geschehen, ich bin hier, um Sie zu führen!",
+        goodbye: "Bis bald auf Ihrem Weg zum inneren und äußeren Sieg mit Victory!",
+        notUnderstood: "Ich habe Ihre Anfrage nicht ganz verstanden. Könnten Sie sie umformulieren oder präzisieren?",
+        notUnderstoodAfter: "Wir scheinen uns nicht richtig zu verstehen. Entdecken Sie unsere Victory Abnehmkapseln oder unser personalisiertes Programm für ganzheitliches Wohlbefinden. Spirituelle Dienste wie Hellsehen per E-Mail oder Ihre Liebeskompatibilitätsanalyse sind ebenfalls verfügbar, um Sie zu unterstützen!",
+        grave: "Ihre Situation scheint ernst zu sein. Handeln Sie jetzt mit unseren Victory Lösungen, um Balance und Energie zurückzugewinnen. Entdecken Sie unsere Programme auf der Website!",
+        agree: "Perfekt, wie kann ich Ihnen weiterhelfen?"
+    };
+
+// Wissensdatenbank mit "Vorteilen"
+const knowledgeBase = [
+    { question: "Müdigkeit | Erschöpfung | Trägheit | Abgeschlagenheit | Schwäche | Abnutzung", fullAnswer: "Diese erdrückende Müdigkeit ist das Werk einer dunklen Entität, die Ihre Energie verschlingt; vertrauen Sie Frederick von ClairVoyanceMedium.com die Reinigung Ihrer Aura an, um Ihre Vitalität zurückzugewinnen. Sie kann das Zeichen einer dunklen Entität sein, die Ihre Lebensenergie Tag für Tag abfließen lässt. Frederick, Experte für spirituelle Reinigung, verwendet uralte Rituale, um Ihre Aura zu reinigen und diese bösen Kräfte zu vertreiben. Durch schnelles Handeln können Sie strahlende Vitalität und klaren Geist zurückgewinnen. Vorteile: Wiederhergestellte Dynamik und zurückeroberte Klarheit." },
+    { question: "Albträume | Visionen | Nächte | Traum | Schlaf | Träume", fullAnswer: "Diese Albträume sind keine einfachen Träume, sie sind das Ergebnis einer bösen Präsenz; lassen Sie Frederick von ClairVoyanceMedium.com diese Schatten vertreiben, um Ihnen friedliche Nächte zu schenken. Sie können Manifestationen einer bösen Präsenz sein, die Ihren Geist während des Schlafs infiltriert. Frederick verfügt über 25 Jahre Erfahrung und beherrscht mächtige Rituale, um Ihren Ruheraum zu reinigen. Sie werden friedliche Nächte und erholsamen Schlaf zurückgewinnen. Vorteile: Regenerierende Ruhe und nächtliche Gelassenheit." },
+    { question: "Chaos | Turbulenzen | Verwirrung | Verzweiflung | Wirbel | Angst", fullAnswer: "Das Chaos um Sie herum stammt von einem störenden Fluch; erlauben Sie Frederick von ClairVoyanceMedium.com, die Ordnung wiederherzustellen und Ihr mentales Gleichgewicht zu stabilisieren. Verwirrung und Angst signalisieren einen störenden Fluch. Frederick, Spezialist für Entzauberung, zerstreut diese negativen Energien. Sie werden mentale Stabilität und inneren Frieden zurückgewinnen. Vorteile: Harmonie und innerer Frieden." },
+    { question: "Schwere | Druck | Erstickung | Gewicht | Angst | Zerdrückung", fullAnswer: "Diese Schwere, die Ihre Seele bedrückt, ist eine dunkle Kraft; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um befreit zu werden und Leichtigkeit wiederzuerlangen. Dieses Erstickungsgefühl ist typisch für eine dunkle Kraft, die Ihre Seele ins Visier nimmt. Frederick bricht diesen Griff mit gezielten Ritualen. Sie werden wiedergewonnene Leichtigkeit und erneuerte Energie spüren. Vorteile: Befreiung und wiederhergestellte Vitalität." },
+    { question: "Fluch | Verhexung | Zauber | Charme | Magie | Hexerei", fullAnswer: "Erschöpfung, Pech und Albträume resultieren aus einem Fluch, der Sie gefangen hält; nutzen Sie Fredericks Intervention von ClairVoyanceMedium.com, um diese okkulten Bindungen zu brechen. Anhaltende Müdigkeit und chronisches Pech sind Zeichen einer Verhexung. Frederick ist Experte für Entzauberung und verwendet mächtige Rituale, um Sie zu befreien. Sie werden Glück und dauerhaften Erfolg zurückgewinnen. Vorteile: Wiederhergestellter Wohlstand und garantierter Triumph." },
+    { question: "Misserfolg | Rückschlag | Fall | Niederlage | Unglück | Scheitern", fullAnswer: "Wiederholte Misserfolge sind auf einen Fluch zurückzuführen, der Ihren Weg blockiert; lassen Sie Frederick von ClairVoyanceMedium.com Ihren Weg zum Erfolg öffnen. Diese Rückschläge sind kein Zufall: Ein Fluch blockiert Ihren Erfolg. Frederick beseitigt diese unsichtbaren Hindernisse und verwandelt Ihren Weg für garantierten Fortschritt. Vorteile: Sieg und garantierter Fortschritt." },
+    { question: "Schlaflosigkeit | Unruhe | Weiße Nächte | Flucht | Wachheit | Sorge", fullAnswer: "Ihre Schlaflosigkeit wird von einer Entität verursacht, die Sie um Ruhe bringt; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ihren nächtlichen Frieden wiederherzustellen. Schlaflose Nächte und Unruhe werden durch eine Entität verursacht, die Ihre Ruhe stört. Frederick vertreibt diese Einflüsse und garantiert Ihnen erholsamen Schlaf. Vorteile: Tiefschlaf und Tagesenergie." },
+    { question: "Schmerz | Leiden | Qual | Brennen | Kummer | Pein", fullAnswer: "Unerklärliche Schmerzen spiegeln einen okkulten Angriff auf Ihren Körper wider; erlauben Sie Frederick von ClairVoyanceMedium.com, dieses unsichtbare Übel zu zerstreuen. Brennen und Qual signalisieren einen okkulten Angriff. Frederick bringt mit spirituellen Heilritualen sofortige Linderung. Vorteile: Sofortige Erleichterung und wiedergewonnener Komfort." },
+    { question: "Isolation | Einsamkeit | Verlassenheit | Not | Rückzug | Kälte", fullAnswer: "Die Isolation, die Sie fühlen, stammt von einem Fluch, der Sie von anderen trennt; vertrauen Sie Frederick von ClairVoyanceMedium.com Ihre Versöhnung an, um warme Verbindungen wiederherzustellen. Diese Einsamkeit wird durch einen Fluch verursacht, der Sie von anderen abschneidet. Frederick bricht diesen Fluch und bringt Verbindung und soziales Wohlbefinden zurück. Vorteile: Annäherung und soziale Erfüllung." },
+    { question: "Karriere | Arbeit | Ambition | Stagnation | Blockade | Fiasko", fullAnswer: "Hindernisse in Ihrer Karriere sind das Zeichen eines Fluchs, der Ihre Ambitionen bremst; lassen Sie Frederick von ClairVoyanceMedium.com Ihr Potenzial befreien. Stagnation und Misserfolge sind auf einen Fluch zurückzuführen. Frederick befreit Ihr Potenzial und führt Sie zum beruflichen Erfolg. Vorteile: Triumph und berufliche Erfüllung." },
+    { question: "Pech | Unglück | Zufall | Unheil | Verhängnis | Katastrophe", fullAnswer: "Das Pech, das Sie erleben, wird von einem dunklen Fluch verursacht; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Glück anzuziehen. Unglück und Katastrophen sind das Werk eines Fluches. Frederick reinigt Ihre Aura, zieht Glück an und öffnet neue Möglichkeiten. Vorteile: Möglichkeiten und wiederhergestellte Fülle." },
+    { question: "Liebe | Leidenschaft | Romantik | Bruch | Lieblosigkeit | Gefühl", fullAnswer: "Das Fehlen von Liebe ist auf einen Fluch zurückzuführen, der Ihr Herz verschließt; erlauben Sie Frederick von ClairVoyanceMedium.com, Ihr Liebesleben wiederzubeleben. Gebrochene Herzen oder emotionale Einsamkeit werden durch einen Fluch verursacht. Frederick hebt diese Barriere mit seiner Liebesmagie auf und bringt Zärtlichkeit und Harmonie. Vorteile: Zuneigung und emotionales Gleichgewicht." },
+    { question: "Familie | Zuhause | Zwietracht | Spannung | Bruch | Konflikt", fullAnswer: "Familienstreitigkeiten resultieren aus einem okkulten Schatten; vertrauen Sie Frederick von ClairVoyanceMedium.com die Harmonisierung Ihrer Beziehungen an. Familienkonflikte werden durch einen okkulten Schatten verursacht. Frederick reinigt Ihr Zuhause und bringt Einheit und Frieden zurück. Vorteile: Einheit und familiäre Ruhe." },
+    { question: "Kinder | Kleine | Nachwuchs | Sohn | Tochter | Kind", fullAnswer: "Der Kummer Ihrer Kinder spiegelt einen dunklen Einfluss wider; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um ihre Aura zu reinigen. Traurigkeit oder Sorgen der Kinder signalisieren einen dunklen Einfluss. Frederick reinigt ihre Aura und bringt der Familie Freude zurück. Vorteile: Glück und familiäre Erfüllung." },
+    { question: "Tiere | Begleiter | Tiere | Nervosität | Störung | Instinkt", fullAnswer: "Die Unruhe Ihrer Tiere zeigt eine dunkle Präsenz an; lassen Sie Frederick von ClairVoyanceMedium.com den Frieden wiederherstellen. Ungewöhnliche Nervosität signalisiert eine dunkle Präsenz. Frederick reinigt ihre Umgebung und schenkt Ihren Begleitern Ruhe. Vorteile: Gelassenheit und Balance für Ihre Begleiter." },
+    { question: "Haus | Wohnung | Heim | Atmosphäre | Dunkelheit | Angst", fullAnswer: "Die bedrückende Atmosphäre Ihres Heims ist von schwarzen Energien befallen; erlauben Sie Frederick von ClairVoyanceMedium.com, Ihr Zuhause zu reinigen. Angst und Dunkelheit signalisieren schwarze Energien. Frederick verwandelt Ihr Heim in ein lichtes Heiligtum. Vorteile: Komfort und häusliche Erfüllung." },
+    { question: "Auto | Fahrzeug | Transport | Panne | Gefahr | Fahrt", fullAnswer: "Die mysteriösen Pannen Ihres Fahrzeugs werden durch einen Fluch verursacht; vertrauen Sie Frederick von ClairVoyanceMedium.com Ihr Auto für Sicherheit an. Verkehrsvorfälle resultieren aus einem Fluch. Frederick reinigt Ihr Fahrzeug und garantiert Ruhe. Vorteile: Gelassenheit und Schutz auf der Straße." },
+    { question: "Präsenz | Schatten | Geist | Aura | Schauder | Eindringen", fullAnswer: "Das Gefühl, verfolgt zu werden, resultiert aus einer bösartigen Entität; lassen Sie Frederick von ClairVoyanceMedium.com Sie beschützen. Schauder signalisieren eine bösartige Entität. Frederick errichtet einen mächtigen Schutz und garantiert Sicherheit. Vorteile: Schutz und mentale Gelassenheit." },
+    { question: "Angst | Furcht | Panik | Horror | Terror | Schrecken", fullAnswer: "Ihre Angst wird von einem zerstörerischen Fluch erzeugt; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Frieden zu schaffen. Panik und Schrecken werden von einem Fluch erzeugt. Frederick beseitigt diese Energien und bringt tiefen Frieden zurück. Vorteile: Beruhigung und gestärktes Selbstvertrauen." },
+    { question: "Reizbarkeit | Wut | Frustration | Raserei | Ungeduld | Ärger", fullAnswer: "Ihre Reizbarkeit spiegelt den Einfluss einer okkulten Kraft wider; nutzen Sie Fredericks Expertise von ClairVoyanceMedium.com, um Gelassenheit wiederherzustellen. Wut und Frustration spiegeln eine okkulte Kraft wider. Frederick stellt Sanftmut wieder her und schenkt emotionale Ruhe. Vorteile: Emotionale Gelassenheit und Harmonie." },
+    { question: "Konzentration | Klarheit | Aufmerksamkeit | Traurigkeit | Unschärfe | Zerstreuung", fullAnswer: "Ihr verwirrter Geist ist das Opfer eines störenden Fluches; lassen Sie Frederick von ClairVoyanceMedium.com Ihre Gedanken neu ausrichten. Geistige Unschärfe ist das Ziel eines Fluches. Frederick beseitigt diese Störungen und garantiert erhöhte Konzentration. Vorteile: Optimierte Aufmerksamkeit und gesteigerte Effizienz." },
+    { question: "Gedächtnis | Vergesslichkeit | Erinnerung | Amnesie | Unordnung | Lücke", fullAnswer: "Gedächtnisverluste resultieren aus einem dunklen Fluch; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ihre Klarheit wiederherzustellen. Gedächtnislücken stammen von einem Fluch. Frederick stellt Ihr Gedächtnis wieder her und stärkt Ihren lebhaften Geist. Vorteile: Gestärkte Erinnerung und geistige Lebhaftigkeit." },
+    { question: "Linie | Erbe | Vorfahren | Familie | Vergangenheit | Last", fullAnswer: "Der Fluch Ihrer Vorfahren lastet auf Ihrem Erbe; vertrauen Sie sich Frederick von ClairVoyanceMedium.com an, um befreit zu werden. Eine generationenübergreifende Last kann auf Ihrer Linie liegen. Frederick durchbricht diesen Kreislauf und öffnet Ihnen zu familiärer Freiheit. Vorteile: Familiäre Befreiung und persönliche Erneuerung." },
+    { question: "Zwang | Schraubstock | Erstickung | Druck | Benommenheit | Gefangenschaft", fullAnswer: "Die Unterdrückung, die Sie erleben, ist eine schwarze Kraft; erlauben Sie Frederick von ClairVoyanceMedium.com, Sie zu befreien. Das Gefühl eines Schraubstocks ist eine schwarze Kraft. Frederick befreit Sie mit mächtigen Ritualen und schenkt Leichtigkeit. Vorteile: Freiheit und wiederhergestellte Kraft." },
+    { question: "Leid | Kummer | Herzschmerz | Elend | Wunde | Qual", fullAnswer: "Das Leiden, das Sie empfinden, stammt von einem okkulten Angriff; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um geheilt zu werden. Kummer und Herzschmerz sind ein okkulter Angriff. Frederick reinigt Ihr Wesen und bringt schnelle Heilung. Vorteile: Schnelle Genesung und dauerhafte Erleichterung." },
+    { question: "Trennung | Leere | Entfremdung | Entfremdung | Nichts | Abgrund", fullAnswer: "Die innere Leere resultiert aus einem isolierenden Fluch; lassen Sie Frederick von ClairVoyanceMedium.com Sie mit Ihrem Wesen verbinden. Diese Trennung wird durch einen Fluch verursacht. Frederick verbindet Sie neu und schenkt innere Einheit. Vorteile: Innere Kohärenz und wiedergewonnene Balance." },
+    { question: "Vibration | Energie | Halo | Erschöpfung | Dämon | Finsternis", fullAnswer: "Ihre getrübte Aura ist von Dunkelheit verschmutzt; vertrauen Sie Frederick von ClairVoyanceMedium.com ihre Reinigung an, um das Licht zu enthüllen. Eine gestörte Aura signalisiert dunkle Verschmutzung. Frederick vertreibt diese Dunkelheit und schenkt positive Energie. Vorteile: Positive Vitalität und revitalisierter Glanz." },
+    { question: "Projekte | Ambitionen | Pläne | Stagnation | Traum | Hindernis", fullAnswer: "Ihre Ambitionen werden von einem bösen Fluch behindert; lassen Sie Frederick von ClairVoyanceMedium.com Ihr Potenzial befreien. Hindernisse für Ihre Projekte sind auf einen Fluch zurückzuführen. Frederick beseitigt diese Blockaden und aktiviert fruchtbare Projekte. Vorteile: Erfolg und kreativer Schwung." },
+    { question: "Stress | Nervosität | Erschöpfung | Überlastung | Unruhe | Qual", fullAnswer: "Der Stress, der Sie belastet, ist der Griff einer okkulten Kraft; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ihre Spannungen zu lindern. Stress und Nervosität sind eine okkulte Kraft. Frederick beruhigt diese Spannungen und schenkt Gelassenheit. Vorteile: Ruhe und mentaler Frieden." },
+    { question: "Schicksal | Weg | Dunkelheit | Sinn | Unsicherheit | Verhängnis", fullAnswer: "Ihr Schicksal ist von einem Fluch verhüllt, der Ihr Leben verdunkelt; lassen Sie Frederick von ClairVoyanceMedium.com Ihren Weg erleuchten. Ein verhülltes Schicksal signalisiert einen Fluch. Frederick zerstreut diese Schatten und führt zu strahlender Erneuerung. Vorteile: Hoffnung und persönliche Verwandlung." },
+    { question: "Übergewicht | Kilos | Silhouette | Schlankheit | Fett | Gewicht", fullAnswer: "Ihr Übergewicht bremst Ihr Selbstvertrauen; vertrauen Sie Ihre Transformation den Victory Abnehmkapseln von ClairVoyanceMedium.com an. Dieses metabolische Ungleichgewicht kann natürlich gelöst werden. Die Kapseln auf Basis von Meereschitin und das Personalisierte Abnehmprogramm formen Ihre Silhouette. Verlieren Sie bis zu 12 kg in 2 Monaten mit natürlichen Inhaltsstoffen. Vorteile: Geformte Silhouette und gesteigerte Energie." },
+    { question: "Blähungen | Unbehagen | Bauch | Schlankheit | Wassereinlagerungen | Verdauung", fullAnswer: "Diese Bauchschwere beeinträchtigt Ihr Wohlbefinden; wählen Sie die Victory Abnehmkapseln von ClairVoyanceMedium.com. Blähungen signalisieren einen verlangsamten Stoffwechsel. Die Kapseln und das Personalisierte Abnehmprogramm reduzieren Wassereinlagerungen und formen Ihren Bauch. Gewinnen Sie in 1 Woche Leichtigkeit zurück. Vorteile: Flacher Bauch und wiedergewonnener Komfort." },
+    { question: "Plateau | Schlankheit | Widerstand | Kilos | Stillstand | Silhouette", fullAnswer: "Ihr Abnehmplateau blockiert Ihre Fortschritte; vertrauen Sie den Victory Abnehmkapseln von ClairVoyanceMedium.com. Diese Stagnation ist oft metabolisch bedingt. Die Kapseln und das Personalisierte Abnehmprogramm entblockieren Ihren Stoffwechsel. Verlieren Sie 8-12 kg in 2 Monaten nachhaltig. Vorteile: Dauerhafte Ergebnisse und wiedergewonnenes Vertrauen." },
+    { question: "Heißhunger | Appetit | Schlankheit | Kontrolle | Anfälle | Fett", fullAnswer: "Ihr Heißhunger stört Ihre Gewichtsabnahme; vertrauen Sie den Victory Abnehmkapseln von ClairVoyanceMedium.com. Unkontrollierter Appetit spiegelt ein hormonelles Ungleichgewicht wider. Die Kapseln und das Personalisierte Abnehmprogramm regulieren Ihren Stoffwechsel. Kontrollieren Sie Ihr Gewicht ab heute. Vorteile: Kontrolle und schlankere Silhouette." },
+    { question: "Balance | Körper | Straffung | Vitalität | Harmonie | Menge | Dosierung", fullAnswer: "Ihr Körper verdient es, sein natürliches Gleichgewicht zu erreichen. Entdecken Sie die Victory Kapseln von ClairVoyanceMedium.com, formuliert mit effektiv dosiertem Meereschitin für dauerhafte Straffung. Mit einer auf Ihren Stoffwechsel abgestimmten Dosierung und optimaler Menge gewinnen Sie in 2 Monaten Ihr Wohlbefinden zurück und steigern Ihre Vitalität. Für einen personalisierten Ansatz machen Sie jetzt den BMI-Test auf unserer Website, um die ideale Dosierung und das maßgeschneiderte Programm für Sie zu bestimmen. Harmonieren Sie Ihren Körper und gewinnen Sie Vertrauen!" },
+    { question: "Kontakt | Kontaktiere | Anruf | Nachricht | Email | Erreichbarkeit | Kommunikation", fullAnswer: "Kontaktieren Sie Frederick jetzt per E-Mail unter folgender Adresse: contact.clairvoyancemedium@gmail.com. Unser Team wird Ihnen schnell antworten, um eine E-Mail-Beratung oder ein mächtiges Ritual zu organisieren, das Ihnen sofortige Reaktivität und eine an Ihre Bedürfnisse angepasste Transformation garantiert. Vorteile: Reaktivität und sofortige Transformation." },
+    { question: "Gewicht | Schlankheit | Körper | Kilos | Transformation | Bauch", fullAnswer: "Ihre überflüssigen Kilos trüben Ihre Silhouette; transformieren Sie sich mit den Victory Abnehmkapseln von ClairVoyanceMedium.com. Dieses Übergewicht spiegelt einen verlangsamten Stoffwechsel wider. Die Kapseln und das Personalisierte Abnehmprogramm formen Ihren Körper. Verlieren Sie bis zu 12 kg in 2 Monaten. Vorteile: Straffer Körper und Selbstvertrauen." },
+    { question: "Wassereinlagerungen | Schlankheit | Schwellung | Schwere | Stoffwechsel | Verdauung", fullAnswer: "Ihr Verdauungsunbehagen bremst Ihr Wohlbefinden; wählen Sie die Victory Abnehmkapseln von ClairVoyanceMedium.com. Blähungen signalisieren ein metabolisches Ungleichgewicht. Die Kapseln und das Personalisierte Abnehmprogramm beruhigen Ihre Verdauung. Gewinnen Sie in 7 Tagen Leichtigkeit zurück. Vorteile: Fließende Verdauung und schlankere Silhouette." },
+    { question: "Beziehungen | Bindungen | Freundschaft | Konflikt | Distanz | Bruch", fullAnswer: "Gebrochene Beziehungen resultieren aus einem zerstörerischen Fluch; lassen Sie Frederick von ClairVoyanceMedium.com Ihre Verbindungen reparieren. Konflikte mit Ihren Lieben resultieren aus einem Fluch. Frederick reinigt diese Bindungen und bringt Versöhnung zurück. Vorteile: Annäherung und soziale Einheit." },
+    { question: "Finanzen | Geld | Reichtum | Armut | Fluss | Schulden", fullAnswer: "Finanzielle Schwierigkeiten stammen von einem Fluch, der Fülle blockiert; vertrauen Sie Frederick von ClairVoyanceMedium.com die Aufgabe an, Reichtum wiederherzustellen. Schulden werden durch einen Fluch verursacht. Frederick beseitigt diese Hindernisse und schenkt Wohlstand. Vorteile: Fülle und wirtschaftliches Gleichgewicht." },
+    { question: "Zukunft | Hoffnung | Morgen | Unsicherheit | Katastrophe | Bedrohung", fullAnswer: "Ihre Zukunft ist von einem dunklen Fluch bedroht; lassen Sie Frederick von ClairVoyanceMedium.com Ihren Weg erleuchten. Unsicherheit über die Zukunft ist auf einen Fluch zurückzuführen. Frederick zerstreut diese Schatten und führt zu einer vielversprechenden Zukunft. Vorteile: Vertrauen und erneuerte Horizonte." },
+    { question: "Muskeln | Schmerz | Steifheit | Müdigkeit | Krampf | Erschöpfung", fullAnswer: "Muskelschmerzen zeugen von einem Fluch, der Ihre Kraft schwächt; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ihre Energie wiederherzustellen. Schmerzen und Steifheit sind ein Fluch. Frederick stellt Ihre Kraft wieder her und schenkt Beweglichkeit. Vorteile: Flexibilität und wiederhergestellte Energie." },
+    { question: "Halluzinationen | Erscheinungen | Trugbilder | Dunkelheit | Illusion | Geist", fullAnswer: "Visionen und Halluzinationen resultieren aus okkulten Angriffen; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um diese Illusionen zu zerstreuen. Erscheinungen sind okkulte Angriffe. Frederick reinigt Ihren Geist und schenkt Klarheit. Vorteile: Klarheit und wahrnehmungsbezogene Ruhe." },
+    { question: "Angriff | Aggression | Ansturm | Feindseligkeit | Invasion | Fluch", fullAnswer: "Die empfundenen Aggressionen stammen von einer feindseligen Kraft; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um diese Bedrohungen zu neutralisieren. Energetische Bedrohungen sind eine feindselige Kraft. Frederick gewährleistet Ihre Sicherheit. Vorteile: Schutz und innere Ruhe." },
+    { question: "Dringlichkeit | Krise | Unmittelbarkeit | Eile | Alarm | Gefahr", fullAnswer: "Die Dringlichkeit angesichts bedrohlicher Schatten erfordert Handeln; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ihr Schicksal zu sichern. Krise und Gefahr erfordern schnelles Eingreifen. Frederick stoppt diese Bedrohungen und garantiert Frieden. Vorteile: Schnelles Eingreifen und garantierte Sicherheit." },
+    { question: "Unterstützung | Führung | Hilfe | Rettung | Sorge | Schutz", fullAnswer: "Die Unterstützung, die Sie brauchen, wird von Frederick von ClairVoyanceMedium.com gewährleistet; genießen Sie konstanten Schutz. Angesichts der Schatten bietet Frederick erfahrene Führung und bewahrt Ihre Sicherheit. Vorteile: Schutz und persönliche Begleitung." },
+    { question: "Ruf | Glaubwürdigkeit | Renommee | Zuverlässigkeit | Prestige | Vertrauen", fullAnswer: "Mit 25 Jahren Erfolg ist Frederick von ClairVoyanceMedium.com ein Bollwerk gegen die Dunkelheit; vertrauen Sie ihm, um Ihr Leben zu verwandeln. Seine Erfahrung macht ihn zu einer sicheren Wahl und garantiert greifbare Ergebnisse. Vorteile: Bewährte Expertise und konkrete Ergebnisse." },
+    { question: "Analyse | Diagnose | Sitzung | Bewertung | Ritual | Sitzung", fullAnswer: "Eine Beratung mit Frederick von ClairVoyanceMedium.com reinigt Ihre Aura; engagieren Sie sich für eine Transformation. Diese Reinigung bereitet Ihre Rettung vor und bietet sofortige Klarheit und Erneuerung. Vorteile: Sofortige Klarheit und Revitalisierung." },
+    { question: "Methoden | Techniken | Praktiken | Geheimnisse | Wissen | Riten", fullAnswer: "Fredericks Rituale von ClairVoyanceMedium.com reinigen Ihre Aura in 4 Tagen; wählen Sie diese bewährte Methode. Diese uralten Rituale vertreiben die Schatten und garantieren schnelle Transformation. Vorteile: Effizienz und schnelle Revitalisierung." },
+    { question: "Vertraulichkeit | Geheimnis | Diskretion | Sicherheit | Privatsphäre | Schutz", fullAnswer: "Fredericks Diskretion von ClairVoyanceMedium.com schützt Ihre Seele; vertrauen Sie ihm Ihre Geheimnisse für Heilung an. Frederick garantiert totale Privatsphäre und bringt Vertrauen zurück. Vorteile: Gelassenheit und garantiertes Vertrauen." },
+    { question: "Preise | Kosten | Preisgestaltung | kostet | Versand | Preis | Wert | Zahlung", fullAnswer: "Ein günstiger Preis wird für die Reinigung Ihrer Aura oder Straffung Ihrer Silhouette angeboten; investieren Sie für eine radikale Veränderung. Ab 6,00€ für eine Hellsehung per E-Mail oder 19,00€ für die Victory Abnehmkapseln bietet diese Investition unschätzbaren Wert. Der weltweite Versand ist momentan ohne Mindestbestellwert kostenlos. Vorteile: Kontrollierter Preis und wertvolle Leistung." },
+    { question: "Erfolg | Sieg | Triumph | Wohlstand | Vollendung | Gewinn", fullAnswer: "Frederick von ClairVoyanceMedium.com verwandelt Leben in Richtung Erfolg; engagieren Sie sich für einen garantierten Sieg. Frederick führt zu Erfolg in Projekten oder Karriere und garantiert Wohlstand. Vorteile: Fülle und persönliche Erfüllung." },
+    { question: "Horror | Schauder | Dunkelheit | Schwarz | Nacht | Angst", fullAnswer: "Nächtliche Ängste resultieren aus einem bösen Fluch; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Sicherheit zu schaffen. Horror und Schauder sind ein Fluch, der Ihre Nächte stört. Frederick reinigt Ihre Umgebung und garantiert Frieden. Vorteile: Ruhe und garantierte Gelassenheit." },
+    { question: "Verzweiflung | Traurigkeit | Trauer | Melancholie | Verlust | Kummer", fullAnswer: "Verzweiflung wird von einem okkulten Schatten verursacht; lassen Sie Frederick von ClairVoyanceMedium.com das Licht wiederbeleben. Tiefe Traurigkeit ist ein Schatten, der Ihr Licht auslöscht. Frederick gibt Hoffnung zurück und bietet emotionale Erneuerung. Vorteile: Hoffnung und emotionale Erneuerung." },
+    { question: "Kälte | Zittern | Tief | Kalt | Eisig | Panik", fullAnswer: "Die von eisiger Kälte geprägte Angst ist ein lähmender Fluch; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ihre Wärme wiederherzustellen. Schüttelfrost und Kälte sind ein Fluch. Frederick stellt innere Wärme wieder her und bietet Trost. Vorteile: Entspannung und wiedergewonnenes Vertrauen." },
+    { question: "Ja | Einverstanden | ok | Ich stimme zu | Bestätigt | Abon | Natürlich", fullAnswer: "🙂" },
+    { question: "Schwarz | Schleier | Dunkel | Ewigkeit | Dämmerung | Abgrund", fullAnswer: "Die Dunkelheit, die Sie umhüllt, ist ein böser Fluch; erlauben Sie Frederick von ClairVoyanceMedium.com, das Licht zurückzubringen. Finsternis ist ein Fluch, der Ihr Schicksal verdunkelt. Frederick reinigt Ihren Weg und bietet Erleuchtung. Vorteile: Klarheit und garantierte Revitalisierung." },
+    { question: "Trostlosigkeit | Zurückgezogen | Total | Isolation | Verlassenheit | Nichts", fullAnswer: "Einsamkeit ist ein Fluch der Finsternis; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um wieder verbunden zu sein. Trostlosigkeit ist ein Fluch. Frederick stellt wesentliche Verbindungen wieder her und schenkt soziale Harmonie. Vorteile: Annäherung und soziale Einheit." },
+    { question: "Verrat | Hinterlist | Untreue | Loyalität | Enttäuschung | Doppelzüngigkeit", fullAnswer: "Verrat resultiert aus einem zerstörerischen Fluch; erlauben Sie Frederick von ClairVoyanceMedium.com, Loyalität wiederherzustellen. Enttäuschung ist ein Fluch, der Ihre Beziehungen schwächt. Frederick schützt Ihre Bindungen und schenkt Vertrauen. Vorteile: Sicherheit und wiederhergestellte Treue." },
+    { question: "Geflüster | Flüstern | Stimme | Echo | Geräusche | Atem", fullAnswer: "Beunruhigendes Geflüster resultiert aus einem subtilen Fluch; lassen Sie Frederick von ClairVoyanceMedium.com Stille schaffen. Geistergeräusche sind ein störender Fluch. Frederick reinigt den Raum und schenkt inneren Frieden. Vorteile: Beruhigung und optimierte Aufmerksamkeit." },
+    { question: "Grauheit | Düster | Trist | Schwärze | Düster | Unheilvoll", fullAnswer: "Die umgebende Düsternis ist ein drückender Fluch; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ihr Licht zu enthüllen. Grauheit ist ein Fluch, der Ihr Leben verdunkelt. Frederick stellt Ihren Glanz wieder her und bietet Erneuerung. Vorteile: Revitalisierung und wiedergewonnener Glanz." },
+    { question: "Skeptizismus | Verdacht | Kalt | Misstrauen | Befragung | Zweifel", fullAnswer: "Zweifel werden von einem dunklen Fluch gesät; lassen Sie Frederick von ClairVoyanceMedium.com Ihre Gedanken klären. Misstrauen ist ein Fluch, der Ihre Sicht trübt. Frederick zerstreut diese Einflüsse und schenkt Sicherheit. Vorteile: Vertrauen und mentale Klarheit." },
+    { question: "Bye | bybye | Bis bald| Auf Wiedersehen | Ciao | Ich komme wieder | Guten Tag | Guten Abend", fullAnswer: "Bis bald im ewigen Licht! Frederick, der Tausenden von Seelen geholfen hat, umgibt Sie mit seiner ständigen Wachsamkeit. Sie sind nicht mehr allein gegen die Schatten, denn wissen Sie, dass seine Kraft alle Dunkelheit übersteigt." },
+    { question: "Uneinigkeit | Clash | Spaltung | Streit | Bruch | Zwietracht", fullAnswer: "Zwietracht wird von einem zerstörerischen Fluch verursacht; erlauben Sie Frederick von ClairVoyanceMedium.com, Ihre Bindungen wieder zu vereinen. Streitigkeiten sind ein Fluch. Frederick reinigt diese Beziehungen und stellt Harmonie wieder her. Vorteile: Einheit und soziale Harmonie." },
+    { question: "Ungerechtigkeit | Ungleichheit | Vorurteil | Parteilichkeit | Fehler | Nachteil", fullAnswer: "Ungerechtigkeit resultiert aus einem voreingenommenen Fluch; erlauben Sie Frederick von ClairVoyanceMedium.com, Fairness wiederherzustellen. Nachteile sind ein Fluch. Frederick stellt Fairness wieder her und führt zu einer harmonischen Zukunft. Vorteile: Rechtschaffenheit und persönliche Harmonie." },
+    { question: "Dämmerlicht | Herz | Inneres | Stumm | Träne | Kummer", fullAnswer: "Tiefer Kummer ist auf einen okkulten Schatten zurückzuführen; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ihr Herz zu trösten. Tränen sind ein Schatten, der Ihr Herz behindert. Frederick stellt das Licht wieder her und bietet Trost. Vorteile: Beruhigung und emotionale Erneuerung." },
+    { question: "Qual | Prüfung | Katastrophe | Erschütterung | Krise | Schock", fullAnswer: "Die Krise wird von einem okkulten Angriff verursacht; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ordnung wiederherzustellen. Qual ist ein okkulter Angriff. Frederick bietet sofortige Wiedergeburt und stellt Stabilität wieder her. Vorteile: Wiederherstellung und wiederhergestelltes Gleichgewicht." },
+    { question: "Wer | Frederic | Frederick | Erfahrung | Know-how | Entzauberer", fullAnswer: "Frederick von ClairVoyanceMedium.com ist ein Experte mit 25 Jahren Erfahrung; seine Beherrschung unsichtbarer Kräfte führt zum Erfolg. Seine geschärften Fähigkeiten verwandeln Karrieren und Bestrebungen mit tiefem Einblick. Vorteile: Bewährtes Know-how und dauerhafte Transformation." },
+    { question: "Dynamik | Energie | Inneres | Kraft | Schwung | Vitalität", fullAnswer: "Die Schwächung Ihrer Vitalität resultiert aus einem Energie abziehenden Fluch; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Ihre Kraft wiederzubeleben. Verlust von Schwung ist ein Fluch. Frederick erweckt Ihre Dynamik und schenkt dauerhafte Kraft. Vorteile: Kraft und wiedergewonnene Energie." },
+    { question: "Flamme | Leidenschaft | Lebhaft | Glanz | Wärme | Leidenschaft", fullAnswer: "Flackernde Leidenschaft ist auf einen erstickenden Fluch zurückzuführen; lassen Sie Frederick von ClairVoyanceMedium.com Ihre Flamme wieder entfachen. Ein erloschenes inneres Feuer ist ein Fluch. Frederick erwärmt Ihre Seele und befreit kreative Energie. Vorteile: Inspiration und kreative Vitalität." },
+    { question: "Hellsehen | Email | Vorhersage | Schicksal | Offenbarung | Führung", fullAnswer: "Ihre Zukunft ist von unsicheren Schatten verhüllt; vertrauen Sie sich der Hellsehung per E-Mail von Frederick auf ClairVoyanceMedium.com an, um Ihren Weg zu erhellen. Zweifel über Ihr Schicksal finden klare Antworten. Frederick bietet mit 25 Jahren Expertise präzise Vorhersagen per E-Mail. Ab 6,00€ erhalten Sie eine persönliche Führung. Vorteile: Klarheit und Vertrauen in Ihre Zukunft." },
+    { question: "Beratung | Email | Vision | Prophezeiung | Zukunft | Rat", fullAnswer: "Die Unsicherheiten von morgen ängstigen Sie; wählen Sie eine E-Mail-Beratung mit Frederick von ClairVoyanceMedium.com für mächtige Enthüllungen. Fragen über Ihre Zukunft verdienen klare Antworten. Frederick führt Sie mit präzisen Visionen, die per E-Mail gesendet werden. Eine Sitzung ab 6,00€ verwandelt Ihre Unsicherheit in Sicherheit. Vorteile: Klarheit und aufgeklärte Entscheidungen." },
+    { question: "Orakel | Email | Weissagung | Zukunft | Intuition | Klärung", fullAnswer: "Ihr Weg ist von Zweifeln verdunkelt; wenden Sie sich an die Hellsehung per E-Mail von Frederick auf ClairVoyanceMedium.com für weissagende Antworten. Unsicherheit blockiert Ihre Entscheidungen. Frederick, Meister der Weissagung, sendet Ihnen intuitive Vorhersagen per E-Mail. Ab 6,00€ entdecken Sie Ihre Zukunft. Vorteile: Gestärkte Intuition und wiedergewonnene Klarheit." },
+    { question: "Vorhersage | Email | Antwort | Weg | Entscheidung | Wahrheit", fullAnswer: "Fragen über Ihre Zukunft lähmen Sie; wählen Sie die Hellsehung per E-Mail von Frederick auf ClairVoyanceMedium.com für enthüllte Wahrheiten. Unentschlossenheit bremst Ihren Schwung. Frederick bietet Ihnen schnelle und präzise Antworten per E-Mail. Ab 6,00€ treffen Sie die richtigen Entscheidungen. Vorteile: Sicherheit und erleuchteter Weg." },
+    { question: "Führung | Email | Spirituell | Bestimmung | Rat | Licht", fullAnswer: "Ihre Seele sucht eine klare Richtung; vertrauen Sie der Hellsehung per E-Mail von Frederick auf ClairVoyanceMedium.com für spirituelle Führung. Spirituelle Zweifel verdunkeln Ihre Bestimmung. Frederick sendet Ihnen tiefgründige Ratschläge per E-Mail. Ab 6,00€ finden Sie das Licht. Vorteile: Innerer Frieden und sichere Richtung." },
+    { question: "Schlankheit | Balance | Körper | Straffung | Vitalität | Harmonie", fullAnswer: "Ihr Körper sehnt sich nach Balance; transformieren Sie sich mit den Victory Abnehmkapseln von ClairVoyanceMedium.com. Ein unausgeglichener Stoffwechsel bremst Ihr Wohlbefinden. Die Kapseln auf Basis von Meereschitin und das Personalisierte Abnehmprogramm harmonisieren Ihren Körper. Verlieren Sie 8-12 kg in 2 Monaten natürlich. Vorteile: Vitalität und schlankere Silhouette." },
+    { question: "Silhouette | Schlankheit | Form | Kilos | Ästhetik | Wohlbefinden", fullAnswer: "Ihrer Silhouette fehlt Glanz; wählen Sie die Victory Abnehmkapseln von ClairVoyanceMedium.com, um zu strahlen. Überflüssige Kilos trüben Ihre Ästhetik. Die Kapseln und das Personalisierte Abnehmprogramm formen Ihre Figur. Verlieren Sie bis zu 12 kg in 2 Monaten. Vorteile: Wiedergewonnene Schönheit und gesteigertes Selbstvertrauen." },
+    { question: "Abnehmen | Stoffwechsel | Verlust | Fett | Energie | Körper", fullAnswer: "Ihr Stoffwechsel verlangsamt Ihre Gewichtsabnahme; vertrauen Sie den Victory Abnehmkapseln von ClairVoyanceMedium.com. Hartnäckiges Fett bremst Ihre Energie. Die Kapseln und das Personalisierte Abnehmprogramm beschleunigen Ihren Stoffwechsel. Verlieren Sie 8-12 kg in 2 Monaten. Vorteile: Wiedergewonnene Energie und geformter Körper." },
+    { question: "Bauch | Schlankheit | Schwellung | Straffung | Komfort | Gewicht", fullAnswer: "Ihr aufgeblähter Bauch trübt Ihren Komfort; wählen Sie die Victory Abnehmkapseln von ClairVoyanceMedium.com zur Straffung. Die Schwellung spiegelt ein Verdauungsungleichgewicht wider. Die Kapseln und das Personalisierte Abnehmprogramm reduzieren dieses Problem. Gewinnen Sie in 7 Tagen einen flachen Bauch zurück. Vorteile: Komfort und elegante Silhouette." },
+    { question: "Überhaupt nicht | Nein", fullAnswer: "?" },
+    { question: "Schlankheit | Appetit | Regulierung | Kilos | Kontrolle | Wohlbefinden", fullAnswer: "Ihr übermäßiger Appetit bremst Ihre Schlankheit; wählen Sie die Victory Abnehmkapseln von ClairVoyanceMedium.com. Heißhunger signalisiert ein hormonelles Ungleichgewicht. Die Kapseln und das Personalisierte Abnehmprogramm regulieren Ihren Appetit. Verlieren Sie bis zu 12 kg in 2 Monaten. Vorteile: Wiedergewonnene Kontrolle und Wohlbefinden." },
+    { question: "Kompatibilität | Liebe | Paar | Harmonie | Beziehung | Schicksal", fullAnswer: "Zweifel über Ihre Beziehung verdunkeln Ihr Herz; vertrauen Sie sich Frederick von ClairVoyanceMedium.com an, um Ihre Liebeskompatibilität enthüllt zu bekommen. Liebesstress signalisiert eine Fehlausrichtung. Frederick, Experte für Liebesmagie, analysiert Ihre Kompatibilität. Gewinnen Sie in 4 Tagen Harmonie zurück. Vorteile: Gestärkte Liebe und dauerhafte Verbindung." },
+    { question: "Gefühle | Magie | Herz | Leidenschaft | Rückkehr | Emotion", fullAnswer: "Ihr gebrochenes Herz sehnt sich nach Leidenschaft; wenden Sie sich an Frederick von ClairVoyanceMedium.com für eine Liebesrückkehr. Liebesverlust ist ein umkehrbarer Fluch. Frederick verwendet Liebesmagie, um die Liebe wiederzubeleben. Gewinnen Sie Ihren Liebsten in 4 Tagen zurück. Vorteile: Wiederbelebte Leidenschaft und emotionales Glück." },
+    { question: "Schutz | Schild | Übel | Energien | Sicherheit | Geist", fullAnswer: "Negative Energien bedrohen Ihren Geist; wenden Sie sich an Frederick von ClairVoyanceMedium.com für ein Schutzschild. Dunkle Einflüsse stören Ihren Frieden. Frederick errichtet einen mächtigen spirituellen Schutz. Leben Sie ab heute in Sicherheit. Vorteile: Gelassenheit und garantierter Schutz." },
+    { question: "Reinigung | Aura | Säuberung | Schatten | Glanz | Seele", fullAnswer: "Ihre Aura ist von Schatten getrübt; vertrauen Sie Frederick von ClairVoyanceMedium.com ihre Reinigung an, um Ihren Glanz wiederzugewinnen. Eine verschmutzte Aura entzieht Ihre Energie. Frederick verwendet uralte Rituale, um Ihre Seele zu reinigen. Gewinnen Sie in 4 Tagen Ihr Licht zurück. Vorteile: Spiritueller Glanz und Vitalität." },
+    { question: "Glück | Wohlstand | Gelegenheit | Erfolg | Wohlstand | Schicksal", fullAnswer: "Unglück blockiert Ihre Möglichkeiten; wenden Sie sich an Frederick von ClairVoyanceMedium.com, um Wohlstand anzuziehen. Ein dunkler Fluch bremst Ihren Erfolg. Frederick reinigt Ihren Weg und öffnet Türen zu Wohlstand. Nutzen Sie jetzt Ihre Chance. Vorteile: Fülle und garantierter Triumph." },
+    { question: "Hellsehen | Offenbarung | Email | Geheimnis | Wahrheit | Intuition", fullAnswer: "Die Geheimnisse Ihrer Zukunft entgehen Ihnen; wählen Sie die Hellsehung per E-Mail von Frederick auf ClairVoyanceMedium.com für enthüllte Wahrheiten. Unsicherheiten blockieren Ihre Intuition. Frederick sendet Ihnen klare Enthüllungen per E-Mail. Ab 6,00€ erhellen Sie Ihr Schicksal. Vorteile: Wahrheit und wiedergewonnene Sicherheit." },
+    { question: "Email | Vorhersage | Rat | Zukunft | Wahl | Klarheit", fullAnswer: "Ihre zukünftigen Entscheidungen sind unklar; vertrauen Sie der Hellsehung per E-Mail von Frederick auf ClairVoyanceMedium.com für sofortige Klarheit. Unentschlossenheit bremst Ihre Projekte. Frederick bietet Ihnen präzise Ratschläge per E-Mail. Ab 6,00€ gehen Sie mit Vertrauen voran. Vorteile: Klarheit und sichere Entscheidungen." },
+    { question: "Schlankheit | Entgiftung | Körper | Ausscheidung | Toxine | Leichtigkeit", fullAnswer: "Ihr Körper wird von Toxinen beschwert; wählen Sie die Victory Abnehmkapseln von ClairVoyanceMedium.com für eine natürliche Entgiftung. Toxine bremsen Ihre Schlankheit. Die Kapseln und das Personalisierte Abnehmprogramm beseitigen Verunreinigungen. Gewinnen Sie in 7 Tagen Leichtigkeit zurück. Vorteile: Gereinigter Körper und schlankere Silhouette." },
+    { question: "Schlankheit | Energie | Verlust | Kilos | Dynamik | Form", fullAnswer: "Ihre überflüssigen Kilos entziehen Ihre Energie; transformieren Sie sich mit den Victory Abnehmkapseln von ClairVoyanceMedium.com. Ein langsamer Stoffwechsel bremst Ihre Form. Die Kapseln und das Personalisierte Abnehmprogramm beschleunigen Ihre Gewichtsabnahme. Verlieren Sie 8-12 kg in 2 Monaten. Vorteile: Dynamik und geformter Körper." },
+    { question: "Schlankheit | Selbstvertrauen | Silhouette | Gewicht | Glanz | Schönheit", fullAnswer: "Ihr mangelndes Selbstvertrauen kommt von Ihrer Silhouette; vertrauen Sie den Victory Abnehmkapseln von ClairVoyanceMedium.com. Kilos trüben Ihren Glanz. Die Kapseln und das Personalisierte Abnehmprogramm straffen Ihren Körper. Verlieren Sie bis zu 12 kg in 2 Monaten. Vorteile: Wiedergewonnene Schönheit und Selbstvertrauen." },
+    { question: "Hellsehen | Email | Liebe | Vorhersage | Herz | Beziehung", fullAnswer: "Ihr Herz zweifelt an der Liebe; wählen Sie die Hellsehung per E-Mail von Frederick auf ClairVoyanceMedium.com für klare Antworten. Liebesunsicherheiten verwirren Ihren Geist. Frederick sendet Ihnen präzise Vorhersagen per E-Mail. Ab 6,00€ erhellen Sie Ihre Liebeszukunft. Vorteile: Klarheit und harmonische Liebe." },
+    { question: "Email | Führung | Karriere | Zukunft | Erfolg | Rat", fullAnswer: "Ihre Karriere ist unsicher; wählen Sie die Hellsehung per E-Mail von Frederick auf ClairVoyanceMedium.com für präzise Führung. Zweifel bremsen Ihren Erfolg. Frederick bietet Ihnen strategische Ratschläge per E-Mail. Ab 6,00€ zeichnen Sie Ihren Berufsweg. Vorteile: Erfolg und garantierte Sicherheit." },
+    { question: "Schlankheit | Bauch | Straffung | Kilos | Komfort | Harmonie", fullAnswer: "Ihr Bauch belastet Ihr Wohlbefinden; vertrauen Sie den Victory Abnehmkapseln von ClairVoyanceMedium.com zur Straffung. Bauchkilos stören Ihre Harmonie. Die Kapseln und das Personalisierte Abnehmprogramm formen Ihren Bauch. Gewinnen Sie in 7 Tagen Komfort zurück. Vorteile: Flacher Bauch und Wohlbefinden." },
+    { question: "Schlankheit | Gewicht | Kalorien | Balance | Körper | Verlust | Vitalität", fullAnswer: "Ihr Gewicht bringt Ihren Körper aus dem Gleichgewicht; wählen Sie die Victory Abnehmkapseln von ClairVoyanceMedium.com für eine Transformation. Ein langsamer Stoffwechsel bremst Ihre Vitalität. Die Kapseln und das Personalisierte Abnehmprogramm fördern die Gewichtsabnahme. Verlieren Sie 8-12 kg in 2 Monaten. Vorteile: Balance und wiedergewonnene Energie." },
+    { question: "Hellsehen | Email | Finanzen | Vorhersage | Reichtum | Zukunft", fullAnswer: "Ihre Finanzen sind unsicher; wenden Sie sich an die Hellsehung per E-Mail von Frederick auf ClairVoyanceMedium.com für klare Vorhersagen. Finanzielle Zweifel blockieren Ihren Wohlstand. Frederick sendet Ihnen Enthüllungen per E-Mail. Ab 6,00€ sichern Sie Ihre finanzielle Zukunft. Vorteile: Klarheit und garantierte Fülle." }
+];
+
+// Vorbereitung der Wissensdatenbank
+function removeAccents(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function levenshteinDistance(a, b) {
+    const matrix = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(null));
+    for (let i = 0; i <= a.length; i++) matrix[0][i] = i;
+    for (let j = 0; j <= b.length; j++) matrix[j][0] = j;
+    for (let j = 1; j <= b.length; j++) {
+        for (let i = 1; i <= a.length; i++) {
+            const indicator = a[i - 1] === b[j - 1] ? 0 : 1;
+            matrix[j][i] = Math.min(
+                matrix[j][i - 1] + 1,
+                matrix[j - 1][i] + 1,
+                matrix[j - 1][i - 1] + indicator
+            );
+        }
+    }
+    return matrix[b.length][a.length];
+}
+
+function phoneticNormalize(str) {
+    return removeAccents(str)
+        .replace(/ph/g, "f")
+        .replace(/k/g, "c")
+        .replace(/qu/g, "k")
+        .replace(/ss/g, "s")
+        .replace(/ée/g, "e")
+        .replace(/ai/g, "e");
+}
+
+const processedKnowledgeBase = knowledgeBase.map(item => ({
+    question: item.question.toLowerCase().split("|").map(word => phoneticNormalize(removeAccents(word.trim()))).filter(word => word.length > 0),
+    fullAnswer: item.fullAnswer
+}));
+
+let nonUnderstoodCount = 0;
+let conversationHistory = [];
+
+function cleanInput(input) {
+    return input.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/).map(word => phoneticNormalize(removeAccents(word))).filter(word => word.length > 0);
+}
+
+function findBestMatch(userInput) {
+    const userWords = cleanInput(userInput);
+    let bestMatch = null, maxScore = 0;
+
+    processedKnowledgeBase.forEach(item => {
+        let score = 0;
+        userWords.forEach(userWord => {
+            item.question.forEach(kbWord => {
+                const distance = levenshteinDistance(userWord, kbWord);
+                const similarity = 1 - distance / Math.max(userWord.length, kbWord.length);
+                if (similarity >= 0.6) {
+                    score += similarity;
+                }
+            });
+        });
+        if (score > maxScore) {
+            maxScore = score;
+            bestMatch = item;
+        }
+    });
+
+    return maxScore > 0 ? bestMatch : null;
+}
+
+// Korrigierte getResponse-Funktion für "Auf Wiedersehen" und "Kontakt"
+function getResponse(userMsg) {
+    const lowerMsg = userMsg.toLowerCase().trim();
+    conversationHistory.push(lowerMsg);
+
+    // Prioritätsprüfung für "Auf Wiedersehen" und Varianten
+    const goodbyeTriggers = ["auf wiedersehen", "aufwiedersehen", "bis bald", "guten tag", "hallo", "bybye", "bye"];
+    if (goodbyeTriggers.some(phrase => lowerMsg === phrase || lowerMsg.startsWith(phrase))) {
+        nonUnderstoodCount = 0;
+        trackClick("Goodbye", "Interaction", 0);
+        return translations.goodbye;
+    } 
+    // Prioritätsprüfung für "Kontakt"
+    else if (lowerMsg === "kontakt" || lowerMsg.startsWith("kontakt")) {
+        nonUnderstoodCount = 0;
+        trackClick("ContactRequest", "Interaction", 0);
+        return "Kontaktieren Sie Frederick jetzt per E-Mail: contact.clairvoyancemedium@gmail.com. Unser Team antwortet Ihnen schnell und garantiert eine Transformation, die auf Ihre Bedürfnisse zugeschnitten ist. Vorteile: Schnelligkeit und Selbstverbesserung.";
+    } 
+    // Andere Grundantworten
+    else if (lowerMsg === "hallo") {
+        nonUnderstoodCount = 0;
+        trackClick("Greeting", "Interaction", 0);
+        return translations.greeting;
+    } else if (lowerMsg === "danke" || lowerMsg === "ich danke ihnen" || lowerMsg === "das ist sehr nett" || lowerMsg === "vielen dank") {
+        nonUnderstoodCount = 0;
+        trackClick("Thanks", "Interaction", 0);
+        return translations.thanks;
+    } else if (["es ist ernst", "ernst", "es ist wirklich ernst"].includes(lowerMsg)) {
+        nonUnderstoodCount = 0;
+        trackClick("Serious", "Interaction", 0);
+        return translations.grave;
+    } else if (["einverstanden", "ja", "jep", "ok"].includes(lowerMsg)) {
+        nonUnderstoodCount = 0;
+        return translations.agree;
+    } 
+    // Suche in der Wissensdatenbank
+    else {
+        const matchedItem = findBestMatch(userMsg);
+        if (matchedItem) {
+            nonUnderstoodCount = 0;
+            trackClick("ResponseGiven", "Interaction", 0);
+            return matchedItem.fullAnswer;
+        } else {
+            nonUnderstoodCount++;
+            trackClick("NotUnderstood", "Interaction", nonUnderstoodCount);
+            if (nonUnderstoodCount < 3) return translations.notUnderstood;
+            nonUnderstoodCount = 0;
+            return translations.notUnderstoodAfter;
+        }
+    }
+}
+
+// Sammeln des Website-Inhalts beim Laden
+const siteContent = [];
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('h1, h2, h3, p, li').forEach(element => {
+        const text = element.textContent.trim().toLowerCase();
+        if (text) siteContent.push({ text: cleanInput(text), raw: element.textContent });
+    });
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
+        try {
+            const data = JSON.parse(script.textContent);
+            if (data['@type'] === 'FAQPage' && data.mainEntity) {
+                data.mainEntity.forEach(item => {
+                    const question = item.name.toLowerCase().trim();
+                    const answer = item.acceptedAnswer.text.trim();
+                    if (question && answer) siteContent.push({ text: cleanInput(question), raw: answer });
+                });
+            }
+        } catch (e) {
+            console.error("Fehler beim Parsen von JSON-LD:", e);
+        }
+    });
+});
+
+function getResponseFromSite(userMsg, callback) {
+    const matchedItem = findBestMatch(userMsg);
+    if (matchedItem) {
+        callback(matchedItem.fullAnswer);
+    } else {
+        const userWords = cleanInput(userMsg);
+        let bestMatch = null, maxScore = 0;
+
+        siteContent.forEach(item => {
+            let score = 0;
+            userWords.forEach(userWord => {
+                item.text.forEach(siteWord => {
+                    const distance = levenshteinDistance(userWord, siteWord);
+                    const similarity = 1 - distance / Math.max(userWord.length, siteWord.length);
+                    if (similarity >= 0.6) {
+                        score += similarity;
+                    }
+                });
+            });
+            if (score > maxScore) {
+                maxScore = score;
+                bestMatch = item.raw;
+            }
+        });
+
+        if (maxScore > 0 && bestMatch) {
+            callback(bestMatch);
+        } else {
+            callback(getResponse(userMsg));
+        }
+    }
+}
+
+function simulateTyping(callback) {
+    const typingMessage = document.createElement("p");
+    typingMessage.className = "bot-message";
+    typingMessage.textContent = "...";
+    chatMessages.appendChild(typingMessage);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    setTimeout(() => {
+        chatMessages.removeChild(typingMessage);
+        callback();
+    }, conversationHistory.length > 2 ? 1000 : 800);
+}
+
+function addMessage(txt, cls) {
+    const p = document.createElement("p");
+    p.className = cls;
+    p.textContent = txt;
+    chatMessages.appendChild(p);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    if (cls === "bot-message" && voiceEnabled) speak(txt);
+}
+
+// Handhabung der Bewegung
+let isDragging = false, currentX = 0, currentY = 0, initialX, initialY;
+const dragHandle = document.getElementById("chat-bubble");
+const chatContainer = document.getElementById("chat-container");
+const chatBox = document.getElementById("chat-box");
+const chatMessages = document.getElementById("chat-messages");
+
+dragHandle.addEventListener("mousedown", startDragging);
+dragHandle.addEventListener("touchstart", startDragging, { passive: false });
+document.addEventListener("mousemove", drag);
+document.addEventListener("mouseup", stopDragging);
+document.addEventListener("touchmove", drag, { passive: false });
+document.addEventListener("touchend", stopDragging);
+
+function startDragging(e) {
+    isDragging = true;
+    if (e.type === "mousedown") {
+        initialX = e.clientX - currentX;
+        initialY = e.clientY - currentY;
+    } else if (e.type === "touchstart") {
+        initialX = e.touches[0].clientX - currentX;
+        initialY = e.touches[0].clientY - currentY;
+    }
+}
+
+function drag(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    let newX = e.type === "mousemove" ? e.clientX - initialX : e.touches[0].clientX - initialX;
+    let newY = e.type === "mousemove" ? e.clientY - initialY : e.touches[0].clientY - initialY;
+    const rect = chatContainer.getBoundingClientRect();
+    const maxX = window.innerWidth - rect.width;
+    const maxY = window.innerHeight - rect.height;
+    currentX = Math.max(0, Math.min(newX, maxX));
+    currentY = Math.max(0, Math.min(newY, maxY));
+    chatContainer.style.left = `${currentX}px`;
+    chatContainer.style.top = `${currentY}px`;
+}
+
+function stopDragging() {
+    isDragging = false;
+}
+
+window.addEventListener('load', () => {
+    const rect = chatContainer.getBoundingClientRect();
+    currentX = window.innerWidth - rect.width - 20;
+    currentY = window.innerHeight - rect.height - 20;
+    chatContainer.style.left = `${currentX}px`;
+    chatContainer.style.top = `${currentY}px`;
+});
+
+function adjustChatContainerPosition() {
+    const rect = chatContainer.getBoundingClientRect();
+    const maxX = window.innerWidth - rect.width;
+    const maxY = window.innerHeight - rect.height;
+    currentX = Math.min(currentX, maxX);
+    currentX = Math.max(0, currentX);
+    currentY = Math.min(currentY, maxY);
+    currentY = Math.max(0, currentY);
+    chatContainer.style.left = `${currentX}px`;
+    chatContainer.style.top = `${currentY}px`;
+}
+
+window.addEventListener('resize', adjustChatContainerPosition);
+
+const chatToggle = document.getElementById("chat-toggle");
+const chatForm = document.getElementById("chat-form");
+const chatInput = document.getElementById("chat-input");
+let firstOpen = true;
+
+chatToggle.addEventListener("click", () => {
+    const isHidden = !chatBox.classList.contains("visible");
+    if (isHidden) {
+        chatContainer.style.width = "300px";
+        chatBox.classList.add("visible");
+        chatToggle.setAttribute("aria-expanded", "true");
+        trackClick("ChatOpen", "Interaction", 0);
+        if (!chatMessages.children.length) addMessage(translations.greeting, "bot-message");
+        adjustChatContainerPosition();
+        setTimeout(() => chatInput.focus(), 300);
+        if (firstOpen && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) && recognition) {
+            recognition.start();
+            firstOpen = false;
+        }
+    } else {
+        chatBox.classList.remove("visible");
+        chatToggle.setAttribute("aria-expanded", "false");
+        trackClick("ChatClose", "Interaction", 0);
+        chatContainer.style.width = "auto";
+        chatContainer.style.height = "auto";
+        adjustChatContainerPosition();
+    }
+});
+
+chatForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const userMsg = chatInput.value.trim();
+    if (!userMsg) return;
+    addMessage(userMsg, "user-message");
+    trackClick("ChatMessage", "Interaction", 0);
+    chatInput.value = "";
+    simulateTyping(() => {
+        getResponseFromSite(userMsg, (answer) => {
+            addMessage(answer, "bot-message");
+        });
+    });
+});
+
+let voiceEnabled = true;
+
+function speak(text) {
+    if (!voiceEnabled || !("speechSynthesis" in window)) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "de-DE";
+    utterance.pitch = 0.5;
+    utterance.rate = 1.1;
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length > 0) {
+        const maleVoice = voices.find(v => v.name.toLowerCase().includes("male") || v.name.toLowerCase().includes("deutsch"));
+        if (maleVoice) utterance.voice = maleVoice;
+    }
+    window.speechSynthesis.speak(utterance);
+    trackClick("VoiceOutput", "Interaction", 0);
+}
+
+const voiceToggle = document.getElementById("voice-toggle");
+voiceToggle.addEventListener("click", () => {
+    voiceEnabled = !voiceEnabled;
+    voiceToggle.classList.toggle("disabled", !voiceEnabled);
+    trackClick(voiceEnabled ? "VoiceEnabled" : "VoiceDisabled", "Interaction", 0);
+});
+
+let speechRecognitionSupported = "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
+let recognition = null;
+
+if (speechRecognitionSupported) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.lang = "de-DE";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        addMessage(transcript, "user-message");
+        trackClick("VoiceInput", "Interaction", 0);
+        simulateTyping(() => {
+            getResponseFromSite(transcript, (answer) => {
+                addMessage(answer, "bot-message");
+            });
+        });
+    };
+    recognition.onend = () => trackClick("VoiceStop", "Interaction", 0);
+    recognition.onerror = (event) => trackClick("VoiceError", "Interaction", event.error);
+}
+
+if (!("speechSynthesis" in window)) voiceToggle.style.display = "none";
 </script nonce="xai-ultra2025">
 
 <!-- JavaScript Scripts -->
