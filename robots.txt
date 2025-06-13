@@ -1,42 +1,136 @@
-# Indique aux robots que toutes les pages peuvent être explorées, sauf restrictions spécifiées
+# robots.txt v3.5 - 2025-05-28
+# Optimiert für https://clairvoyancemedium.github.io/wie-kann-man-schnell-abnehmen-und-auf-nat-rliche-Weise-Gewicht-verlieren.github.io/
+# Ziele: Deutsche Marktführerschaft, maximaler Crawling, Voice-Search-Optimierung, Social-Media-Integration
+
+# --- Allgemeine Richtlinien für legitime Crawler ---
 User-agent: *
-Disallow: /admin/
-Disallow: /tmp/
+Allow: /
+Allow: /de/       # Priorität für deutsche Inhalte
+Allow: /terms/     # AGB
+Allow: /fonts/     # Schriftarten
+Allow: /images/    # Bilder für SEO
+Allow: /js/        # Interaktive Elemente
+Allow: /css/       # Mobile CSS
+Allow: /*.webp$    # Moderne Bildformate
+Allow: /*.jpg$     
+Allow: /*.png$     
+Allow: /*.gif$     
+Allow: /*.js$      
+Allow: /*.css$     
+Disallow: /csp-report-endpoint/  
+Disallow: /kontakt/             # Deutsche Kontaktseite
+Disallow: /datenschutz/         # DSGVO-konform
+Disallow: /kasse/               # Deutsche Checkout-Seite
+Disallow: /suche/               # Suchfunktion
+Disallow: /api/                 
+Disallow: /test/                
+Disallow: /staging/             
+Clean-param: utm_source&utm_medium&utm_campaign&lang&session_id
+
+# --- Googlebot-Optimierung (DE-Priorität) ---
+User-agent: Googlebot
+Crawl-delay: 1
+Allow: /blog/      # Deutsche Blog-Inhalte
+Allow: /artikel/   # Tiefencontent
+Allow: /abnehmen-tipps/ # Keywords
+Clean-param: utm_source&utm_medium&utm_campaign&lang
+Disallow: /csp-report-endpoint/
+Disallow: /kontakt/
+Disallow: /datenschutz/
+Disallow: /kasse/
+
+# --- Googlebot-Image für deutsches Targeting ---
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /de/images/ # Lokalisierte Bilder
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.png$
+Disallow: /favicon_optimized.webp
+
+# --- Bingbot (Microsoft Deutschland) ---
+User-agent: Bingbot
+Crawl-delay: 2
+Allow: /blog/
+Allow: /artikel/
+Allow: /gesundheit/ # Bing Health-Vorteil
+Clean-param: utm_source&utm_medium&utm_campaign&lang
+Disallow: /csp-report-endpoint/
+Disallow: /kontakt/
+Disallow: /datenschutz/
+Disallow: /kasse/
+
+# --- Applebot (DACH-Region) ---
+User-agent: Applebot
+Crawl-delay: 2
+Allow: /blog/
+Allow: /artikel/
+Allow: /ios-gesundheit/ # Apple Health Integration
+Clean-param: utm_source&utm_medium&utm_campaign&lang
+Disallow: /csp-report-endpoint/
+Disallow: /kontakt/
+Disallow: /datenschutz/
+Disallow: /kasse/
+
+# --- DeeplBot (EU-Übersetzungen) ---
+User-agent: DeeplBot
+Allow: /de/
+Allow: /blog/
+Crawl-delay: 3
+
+# --- Deutsche Social-Media-Crawler ---
+User-agent: FacebookBot
+User-agent: Twitterbot
+User-agent: PinterestBot
+Crawl-delay: 2
+Allow: /de/
+Allow: /blog/
+Allow: /shareable/ # Social-Media-optimierte Inhalte
+Allow: /infografiken/
+Clean-param: utm_source&utm_medium&utm_campaign
+
+# --- Deutsche Voice-Assistenten ---
+User-agent: AlexaBot
+User-agent: GoogleAssistant
+User-agent: SiriBot
+Crawl-delay: 1
+Allow: /de/
+Allow: /faq/       # Voice-Search-Fragen
+Allow: /anleitungen/
+Allow: /quick-tipps/
+
+# --- Block schädliche Crawler ---
+User-agent: MJ12bot
+User-agent: AhrefsBot
+User-agent: SemrushBot  # Nur teilweise erlauben
+Disallow: /
+
+# --- SemrushBot mit Einschränkungen ---
+User-agent: SemrushBot
+Crawl-delay: 5
+Allow: /de/
+Allow: /blog/
+Disallow: /kasse/
+Disallow: /benutzerdaten/
+
+# --- Deutsche SEO-Tools ---
+User-agent: SistrixBot
+User-agent: RyteBot
+Crawl-delay: 4
+Allow: /de/blog/
 Disallow: /private/
 
-# Bloquer des URL avec paramètres inutiles pour l'indexation
-Disallow: /*?debug=true
-Disallow: /*?preview=true
+# --- DSGVO-konforme Blockierung ---
+User-agent: *
+Disallow: /daten/
+Disallow: /nutzer/
+Disallow: /tracking/
 
-# Permettre les fichiers nécessaires au bon affichage et fonctionnement
-Allow: /css/
-Allow: /js/
-Allow: /images/
+# --- Crawl-Optimierung für .de ---
+Crawl-delay: 1
+Request-rate: 1/3  # Schnellerer Crawl für DE
 
-# Référencement des ressources multimédias
-Allow: *.png
-Allow: *.jpg
-Allow: *.webp
-Allow: *.css
-Allow: *.js
-
-# Fournir le chemin du fichier sitemap pour une meilleure indexation
-Sitemap: https://www.clairvoyancemedium.com/sitemap.xml
-
-# Autorisation pour les robots Google et Bing pour maximiser les campagnes publicitaires
-User-agent: Googlebot
-Allow: /
-User-agent: AdsBot-Google
-Allow: /
-User-agent: Bingbot
-Allow: /
-
-# Bloquer les robots nuisibles ou non désirés
-User-agent: BadBot
-Disallow: /
-User-agent: EvilScraper
-Disallow: /
-
-# Empêcher l'exploration des fichiers sensibles
-Disallow: /config/
-Disallow: /backup/
+# --- Deutsche Sitemaps ---
+Sitemap: https://clairvoyancemedium.github.io/wie-kann-man-schnell-abnehmen-und-auf-nat-rliche-Weise-Gewicht-verlieren.github.io/de-sitemap.xml
+Sitemap: https://clairvoyancemedium.github.io/wie-kann-man-schnell-abnehmen-und-auf-nat-rliche-Weise-Gewicht-verlieren.github.io/de-image-sitemap.xml
+Sitemap: https://clairvoyancemedium.github.io/wie-kann-man-schnell-abnehmen-und-auf-nat-rliche-Weise-Gewicht-verlieren.github.io/de-video-sitemap.xml
