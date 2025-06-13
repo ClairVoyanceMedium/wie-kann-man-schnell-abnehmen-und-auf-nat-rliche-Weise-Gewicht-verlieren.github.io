@@ -1,104 +1,292 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
-        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
+  <!-- Deutsche Seite (höchste Priorität für den deutschen Markt) -->
+  <url>
+    <loc>https://clairvoyancemedium.github.io/voyance/de/</loc>
+    <lastmod>2025-05-28T00:56:00Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <mobile:mobile/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clairvoyancemedium.github.io/voyance/de/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clairvoyancemedium.github.io/voyance/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clairvoyancemedium.github.io/voyance/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://clairvoyancemedium.github.io/voyance/es/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://clairvoyancemedium.github.io/voyance/it/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://clairvoyancemedium.github.io/voyance/zh/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://clairvoyancemedium.github.io/voyance/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clairvoyancemedium.github.io/voyance/ko/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clairvoyancemedium.github.io/voyance/ru/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://clairvoyancemedium.github.io/voyance/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://clairvoyancemedium.github.io/voyance/ar/" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://clairvoyancemedium.github.io/voyance/nl/" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://clairvoyancemedium.github.io/voyance/sv/" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://clairvoyancemedium.github.io/voyance/pl/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://clairvoyancemedium.github.io/voyance/tr/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://clairvoyancemedium.github.io/voyance/hi/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://clairvoyancemedium.github.io/voyance/th/" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://clairvoyancemedium.github.io/voyance/vi/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://clairvoyancemedium.github.io/voyance/id/" />
+    <xhtml:link rel="alternate" hreflang="ms" href="https://clairvoyancemedium.github.io/voyance/ms/" />
+    <xhtml:link rel="alternate" hreflang="el" href="https://clairvoyancemedium.github.io/voyance/el/" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://clairvoyancemedium.github.io/voyance/cs/" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://clairvoyancemedium.github.io/voyance/da/" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://clairvoyancemedium.github.io/voyance/fi/" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://clairvoyancemedium.github.io/voyance/no/" />
+    <image:image>
+      <image:loc>https://i.imgur.com/x9jJPra.jpg</image:loc>
+      <image:title>Spirituelle Abnehmdienste</image:title>
+      <image:caption>Natürliche Gewichtsabnahme durch spirituelle Methoden</image:caption>
+      <image:geo_location>Deutschland</image:geo_location>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/Dj-pfiIzB44/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Spirituelles Abnehmen meistern</video:title>
+      <video:description>Entdecken Sie die Geheimnisse des spirituellen Gewichtsverlusts mit unseren bewährten Methoden</video:description>
+      <video:content_loc>https://www.youtube.com/shorts/Dj-pfiIzB44</video:content_loc>
+      <video:publication_date>2025-05-27</video:publication_date>
+      <video:duration>60</video:duration>
+      <video:view_count>10000</video:view_count>
+      <video:category>Spiritualität</video:category>
+      <video:tag>spirituell</video:tag>
+      <video:tag>Gewichtsverlust</video:tag>
+      <video:tag>Abnehmen</video:tag>
+      <video:tag>Deutsch</video:tag>
+      <video:author>Voyance Minceur Team</video:author>
+      <video:license>https://www.clairvoyancemedium.com/Conditions-Generales-des-Ventes-et-d-Utilisation-ccsaaaaaa.asp</video:license>
+      <video:rating>5.0</video:rating>
+    </video:video>
+  </url>
+  
+  <!-- Startseite (deutsche Version als primäre Version) -->
+  <url>
+    <loc>https://clairvoyancemedium.github.io/voyance/</loc>
+    <lastmod>2025-05-28T00:56:00Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+    <mobile:mobile/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://clairvoyancemedium.github.io/voyance/de/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://clairvoyancemedium.github.io/voyance/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://clairvoyancemedium.github.io/voyance/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://clairvoyancemedium.github.io/voyance/es/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://clairvoyancemedium.github.io/voyance/it/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://clairvoyancemedium.github.io/voyance/zh/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://clairvoyancemedium.github.io/voyance/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://clairvoyancemedium.github.io/voyance/ko/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clairvoyancemedium.github.io/voyance/ru/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://clairvoyancemedium.github.io/voyance/pt/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://clairvoyancemedium.github.io/voyance/ar/" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://clairvoyancemedium.github.io/voyance/nl/" />
+    <xhtml:link rel="alternate" hreflang="sv" href="https://clairvoyancemedium.github.io/voyance/sv/" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://clairvoyancemedium.github.io/voyance/pl/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://clairvoyancemedium.github.io/voyance/tr/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://clairvoyancemedium.github.io/voyance/hi/" />
+    <xhtml:link rel="alternate" hreflang="th" href="https://clairvoyancemedium.github.io/voyance/th/" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://clairvoyancemedium.github.io/voyance/vi/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://clairvoyancemedium.github.io/voyance/id/" />
+    <xhtml:link rel="alternate" hreflang="ms" href="https://clairvoyancemedium.github.io/voyance/ms/" />
+    <xhtml:link rel="alternate" hreflang="el" href="https://clairvoyancemedium.github.io/voyance/el/" />
+    <xhtml:link rel="alternate" hreflang="cs" href="https://clairvoyancemedium.github.io/voyance/cs/" />
+    <xhtml:link rel="alternate" hreflang="da" href="https://clairvoyancemedium.github.io/voyance/da/" />
+    <xhtml:link rel="alternate" hreflang="fi" href="https://clairvoyancemedium.github.io/voyance/fi/" />
+    <xhtml:link rel="alternate" hreflang="no" href="https://clairvoyancemedium.github.io/voyance/no/" />
+    <image:image>
+      <image:loc>https://i.imgur.com/x9jJPra.jpg</image:loc>
+      <image:title>Spirituelle Gewichtsreduktion</image:title>
+      <image:caption>Transformieren Sie Ihr Leben mit ganzheitlichem Abnehmen</image:caption>
+      <image:geo_location>Deutschland</image:geo_location>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/Dj-pfiIzB44/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Spirituelles Abnehmen für Deutsche</video:title>
+      <video:description>Die revolutionäre Methode für nachhaltigen Gewichtsverlust</video:description>
+      <video:content_loc>https://www.youtube.com/shorts/Dj-pfiIzB44</video:content_loc>
+      <video:publication_date>2025-05-27</video:publication_date>
+      <video:duration>60</video:duration>
+      <video:view_count>10000</video:view_count>
+      <video:category>Ganzheitliche Gesundheit</video:category>
+      <video:tag>Abnehmen</video:tag>
+      <video:tag>Deutsch</video:tag>
+      <video:tag>Spiritualität</video:tag>
+      <video:author>Voyance Minceur Team</video:author>
+      <video:license>https://www.clairvoyancemedium.com/Conditions-Generales-des-Ventes-et-d-Utilisation-ccsaaaaaa.asp</video:license>
+      <video:rating>5.0</video:rating>
+    </video:video>
+  </url>
 
-    <!-- 🔥 Page d'accueil (Priorité maximale) -->
-    <url>
-        <loc>https://clairvoyancemedium.github.io/Comment-retrouver-l-amour-rapidement.github.io/</loc>
-        <lastmod>2025-02-17</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>1.0</priority>
-        <image:image>
-            <image:loc>https://clairvoyancemedium.github.io/images/homepage-main.jpg</image:loc>
-            <image:title>Retrouver l'Amour Rapidement</image:title>
-            <image:caption>Techniques puissantes pour attirer et garder l'amour.</image:caption>
-        </image:image>
-    </url>
+  <!-- Französische Seite -->
+  <url>
+    <loc>https://clairvoyancemedium.github.io/voyance/fr/</loc>
+    <lastmod>2025-05-28T00:56:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://i.imgur.com/x9jJPra.jpg</image:loc>
+      <image:title>Services de Voyance Minceur</image:title>
+      <image:caption>Solutions spirituelles pour la perte de poids</image:caption>
+      <image:geo_location>France</image:geo_location>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/Dj-pfiIzB44/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Maîtrisez l'amincissement psychique aujourd'hui</video:title>
+      <video:description>Découvrez les secrets de la perte de poids spirituelle</video:description>
+      <video:content_loc>https://www.youtube.com/shorts/Dj-pfiIzB44</video:content_loc>
+      <video:publication_date>2025-05-27</video:publication_date>
+      <video:duration>60</video:duration>
+      <video:view_count>10000</video:view_count>
+      <video:category>Spiritualité</video:category>
+      <video:tag>psychique</video:tag>
+      <video:tag>perte de poids</video:tag>
+      <video:author>Voyance Minceur Team</video:author>
+      <video:license>https://www.clairvoyancemedium.com/Conditions-Generales-des-Ventes-et-d-Utilisation-ccsaaaaaa.asp</video:license>
+      <video:rating>5.0</video:rating>
+    </video:video>
+  </url>
 
-    <!-- 🔍 Pages principales -->
-    <url>
-        <loc>https://clairvoyancemedium.github.io/Comment-retrouver-l-amour-rapidement.github.io/rituels-amour/</loc>
-        <lastmod>2025-02-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://clairvoyancemedium.github.io/images/rituels-amour.jpg</image:loc>
-            <image:title>Rituels d'Amour Puissants</image:title>
-            <image:caption>Découvrez comment les rituels d’amour peuvent renforcer vos relations.</image:caption>
-        </image:image>
-    </url>
+  <!-- Englische Seite -->
+  <url>
+    <loc>https://clairvoyancemedium.github.io/voyance/en/</loc>
+    <lastmod>2025-05-28T00:56:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://i.imgur.com/x9jJPra.jpg</image:loc>
+      <image:title>Psychic Weight Loss Services</image:title>
+      <image:caption>Spiritual solutions for weight management</image:caption>
+      <image:geo_location>United States</image:geo_location>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/Dj-pfiIzB44/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Master Psychic Slimming Today</video:title>
+      <video:description>Unlock spiritual weight loss secrets with our program</video:description>
+      <video:content_loc>https://www.youtube.com/shorts/Dj-pfiIzB44</video:content_loc>
+      <video:publication_date>2025-05-27</video:publication_date>
+      <video:duration>60</video:duration>
+      <video:view_count>10000</video:view_count>
+      <video:category>Spirituality</video:category>
+      <video:tag>psychic</video:tag>
+      <video:tag>weight loss</video:tag>
+      <video:author>Voyance Minceur Team</video:author>
+      <video:license>https://www.clairvoyancemedium.com/Conditions-Generales-des-Ventes-et-d-Utilisation-ccsaaaaaa.asp</video:license>
+      <video:rating>5.0</video:rating>
+    </video:video>
+  </url>
 
-    <url>
-        <loc>https://clairvoyancemedium.github.io/Comment-retrouver-l-amour-rapidement.github.io/voyance-email/</loc>
-        <lastmod>2025-02-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://clairvoyancemedium.github.io/images/voyance-email.jpg</image:loc>
-            <image:title>Voyance par E-mail</image:title>
-            <image:caption>Posez vos questions à un voyant expérimenté par e-mail.</image:caption>
-        </image:image>
-    </url>
+  <!-- Blog (deutsche Version) -->
+  <url>
+    <loc>https://clairvoyancemedium.github.io/voyance/blog/</loc>
+    <lastmod>2025-05-28T00:56:00Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://i.imgur.com/H69KvL6.png</image:loc>
+      <image:title>Spiritueller Wohlfühl-Blog</image:title>
+      <image:caption>Fachartikel über psychisches Abnehmen und Spiritualität</image:caption>
+      <image:geo_location>Deutschland</image:geo_location>
+    </image:image>
+  </url>
 
-    <!-- 🎥 Contenu Vidéo (avec ID réel de la vidéo) -->
-    <url>
-        <loc>https://clairvoyancemedium.github.io/Comment-retrouver-l-amour-rapidement.github.io/videos/comment-seduire-vite/</loc>
-        <lastmod>2025-02-10</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-        <video:video>
-            <video:player_loc>https://www.youtube.com/watch?v=ABCD1234EFG</video:player_loc>
-            <video:thumbnail_loc>https://clairvoyancemedium.github.io/images/video-thumbnail.jpg</video:thumbnail_loc>
-            <video:title>Comment séduire rapidement</video:title>
-            <video:description>Découvrez les meilleures techniques pour séduire efficacement.</video:description>
-        </video:video>
-    </url>
+  <!-- Pressemitteilung (deutsche Version) -->
+  <url>
+    <loc>https://clairvoyancemedium.github.io/voyance/blog/pressemitteilung/</loc>
+    <lastmod>2025-05-28T00:56:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <mobile:mobile/>
+    <news:news>
+      <news:publication>
+        <news:name>Voyance Minceur</news:name>
+        <news:language>de</news:language>
+      </news:publication>
+      <news:publication_date>2025-05-27</news:publication_date>
+      <news:title>Weltweiter Start des Programms für spirituelles Abnehmen</news:title>
+      <news:keywords>spirituell, Gewichtsverlust, Spiritualität, Wohlbefinden, Coaching</news:keywords>
+      <news:genres>PressRelease</news:genres>
+    </news:news>
+    <image:image>
+      <image:loc>https://i.imgur.com/H69KvL6.png</image:loc>
+      <image:title>Bild zur Pressemitteilung</image:title>
+      <image:caption>Ankündigung unseres weltweiten spirituellen Programms</image:caption>
+      <image:geo_location>Deutschland</image:geo_location>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/Dj-pfiIzB44/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Start des Programms für spirituelles Abnehmen</video:title>
+      <video:description>Entdecken Sie unser revolutionäres Programm für spirituellen Gewichtsverlust</video:description>
+      <video:content_loc>https://www.youtube.com/shorts/Dj-pfiIzB44</video:content_loc>
+      <video:publication_date>2025-05-27</video:publication_date>
+      <video:duration>60</video:duration>
+      <video:view_count>10000</video:view_count>
+      <video:category>Wohlbefinden</video:category>
+      <video:tag>spirituell</video:tag>
+      <video:tag>Gewichtsverlust</video:tag>
+      <video:tag>Deutsch</video:tag>
+      <video:author>Voyance Minceur Team</video:author>
+      <video:license>https://www.clairvoyancemedium.com/Conditions-Generales-des-Ventes-et-d-Utilisation-ccsaaaaaa.asp</video:license>
+      <video:rating>5.0</video:rating>
+    </video:video>
+  </url>
 
-    <!-- 📰 Articles Google News -->
-    <url>
-        <loc>https://clairvoyancemedium.github.io/Comment-retrouver-l-amour-rapidement.github.io/news/nouvelle-technique-de-seduction/</loc>
-        <lastmod>2025-02-13</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.9</priority>
-        <news:news>
-            <news:publication>
-                <news:name>Voyance & Amour News</news:name>
-                <news:language>fr</news:language>
-            </news:publication>
-            <news:publication_date>2025-02-13</news:publication_date>
-            <news:title>Nouvelle Technique de Séduction Révélée</news:title>
-            <news:keywords>séduction, amour, relation</news:keywords>
-        </news:news>
-    </url>
+  <!-- Spezifischer Blogartikel (deutsche Version) -->
+  <url>
+    <loc>https://clairvoyancemedium.github.io/voyance/blog/neuer-artikel/</loc>
+    <lastmod>2025-05-28T00:56:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <mobile:mobile/>
+    <news:news>
+      <news:publication>
+        <news:name>Voyance Minceur</news:name>
+        <news:language>de</news:language>
+      </news:publication>
+      <news:publication_date>2025-05-27</news:publication_date>
+      <news:title>Fortgeschrittene Techniken für spirituellen Gewichtsverlust</news:title>
+      <news:keywords>spirituell, Abnehmen, Spiritualität, Wohlbefinden, Methoden</news:keywords>
+      <news:genres>Blog</news:genres>
+    </news:news>
+    <image:image>
+      <image:loc>https://i.imgur.com/H69KvL6.png</image:loc>
+      <image:title>Bild zum spirituellen Artikel</image:title>
+      <image:caption>Meistern Sie die Techniken des spirituellen Abnehmens</image:caption>
+      <image:geo_location>Deutschland</image:geo_location>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/Dj-pfiIzB44/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Masterclass für spirituelles Abnehmen</video:title>
+      <video:description>Lernen Sie fortgeschrittene Techniken für spirituellen Gewichtsverlust</video:description>
+      <video:content_loc>https://www.youtube.com/shorts/Dj-pfiIzB44</video:content_loc>
+      <video:publication_date>2025-05-27</video:publication_date>
+      <video:duration>60</video:duration>
+      <video:view_count>10000</video:view_count>
+      <video:category>Coaching</video:category>
+      <video:tag>Spiritualität</video:tag>
+      <video:tag>Gewichtsverlust</video:tag>
+      <video:tag>Deutsch</video:tag>
+      <video:author>Voyance Minceur Team</video:author>
+      <video:license>https://www.clairvoyancemedium.com/Conditions-Generales-des-Ventes-et-d-Utilisation-ccsaaaaaa.asp</video:license>
+      <video:rating>5.0</video:rating>
+    </video:video>
+  </url>
 
-    <!-- 📱 Page optimisée pour mobile -->
-    <url>
-        <loc>https://clairvoyancemedium.github.io/Comment-retrouver-l-amour-rapidement.github.io/mobile/</loc>
-        <lastmod>2025-02-17</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.9</priority>
-        <mobile:mobile/>
-    </url>
-
-    <!-- 📜 Pages légales -->
-    <url>
-        <loc>https://clairvoyancemedium.github.io/Comment-retrouver-l-amour-rapidement.github.io/mentions-legales/</loc>
-        <lastmod>2025-01-10</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://clairvoyancemedium.github.io/Comment-retrouver-l-amour-rapidement.github.io/cgv/</loc>
-        <lastmod>2025-01-10</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
+  <!-- Artikelbereich (deutsche Version) -->
+  <url>
+    <loc>https://clairvoyancemedium.github.io/voyance/artikel/</loc>
+    <lastmod>2025-05-28T00:56:00Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://i.imgur.com/H69KvL6.png</image:loc>
+      <image:title>Artikel über spirituelles Abnehmen</image:title>
+      <image:caption>Vertiefende Einblicke in spirituellen Gewichtsverlust</image:caption>
+      <image:geo_location>Deutschland</image:geo_location>
+    </image:image>
+  </url>
 </urlset>
